@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Étude & Conseil — Conception — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span><a href="{% url 'conception:index' %}">Conception</a><span class="sep">/</span>Étude & conseil</div>
+    <span class="eyebrow">A — Conception</span>
+    <h1>Conseil &amp; étude terrain</h1>
+    <p class="lead">Analyse de la topographie, de la nature du sol et des normes applicables avant toute proposition.</p>
+    <div class="pole-subnav">
+      <a href="{% url 'conception:index' %}">Vue d'ensemble</a>
+      <a href="{% url 'conception:etude_conseil' %}" class="is-current">Étude & conseil</a>
+      <a href="{% url 'conception:plans_3d' %}">Plans 2D/3D</a>
+      <a href="{% url 'conception:devis' %}">Devis</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap two-col">
+    <div class="prose">
+      <h3>Notre méthode d'étude préliminaire</h3>
+      <p>Chaque terrain est unique. Avant d'élaborer le moindre plan, nous nous déplaçons sur votre parcelle afin d'étudier l'orientation, les dénivelés, l'accès aux réseaux et la consistance du sol.</p>
+      <ul>
+        <li>Visite technique et relevé topographique</li>
+        <li>Conseils d'implantation selon le PDU et le PLU local</li>
+        <li>Recommandations sur les matériaux et la structure adaptés</li>
+      </ul>
+    </div>
+    <aside class="sticky">
+      <div class="info-block">
+        <h4>Étude gratuite</h4>
+        <p>Le premier rendez-vous et la première visite de faisabilité sont offerts.</p>
+      </div>
+      <a href="{% url 'conception:index' %}#contact-form" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:18px;">Démarrer une étude</a>
+    </aside>
+  </div>
+</section>
+{% endblock %}

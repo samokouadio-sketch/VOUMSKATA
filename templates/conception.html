@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Conception — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span>A — Conception</div>
+    <span class="eyebrow">A — Conception</span>
+    <h1>Des projets pensés pour<br>votre terrain, pas sur catalogue.</h1>
+    <p class="lead">Avant tout coup de pioche, nous étudions votre terrain, vos souhaits et les normes en vigueur — pour un projet qui tient ses promesses du plan au chantier.</p>
+    <div class="page-hero-meta">
+      <div><b>48h</b><span>Premier rendez-vous</span></div>
+      <div><b>2D + 3D</b><span>Rendus fournis</span></div>
+      <div><b>0 FCFA</b><span>Étude préliminaire</span></div>
+    </div>
+    <div class="pole-subnav">
+      <a href="{% url 'conception:index' %}" class="is-current">Vue d'ensemble</a>
+      <a href="{% url 'conception:etude_conseil' %}">Étude & conseil</a>
+      <a href="{% url 'conception:plans_3d' %}">Plans 2D/3D</a>
+      <a href="{% url 'conception:devis' %}">Devis</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="grid-3">
+      <div class="card"><div class="card-body" style="padding:26px;">
+        <svg class="product-ic" viewBox="0 0 24 24" fill="none" stroke="#27963C" stroke-width="1.6"><path d="M3 21l6-6M3 21v-6h6M21 3l-6 6M21 3h-6v6"/></svg>
+        <h4 style="margin:14px 0 8px;">Conseil &amp; étude terrain</h4>
+        <p style="font-size:14px;color:var(--gray);">Analyse de la topographie, de la nature du sol et des normes applicables avant toute proposition.</p>
+        <a href="{% url 'conception:etude_conseil' %}" class="pillar-cta" style="margin-top:12px;">En savoir plus →</a>
+      </div></div>
+      <div class="card"><div class="card-body" style="padding:26px;">
+        <svg class="product-ic" viewBox="0 0 24 24" fill="none" stroke="#27963C" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+        <h4 style="margin:14px 0 8px;">Plans 2D &amp; rendus 3D</h4>
+        <p style="font-size:14px;color:var(--gray);">Des plans détaillés et des rendus 3D réalistes pour visualiser le bien avant construction.</p>
+        <a href="{% url 'conception:plans_3d' %}" class="pillar-cta" style="margin-top:12px;">En savoir plus →</a>
+      </div></div>
+      <div class="card"><div class="card-body" style="padding:26px;">
+        <svg class="product-ic" viewBox="0 0 24 24" fill="none" stroke="#27963C" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+        <h4 style="margin:14px 0 8px;">Devis détaillé</h4>
+        <p style="font-size:14px;color:var(--gray);">Un chiffrage clair, poste par poste, avant tout engagement de votre part.</p>
+        <a href="{% url 'conception:devis' %}" class="pillar-cta" style="margin-top:12px;">En savoir plus →</a>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="process blueprint">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Déroulé</span>
+      <h2>Comment se déroule une étude</h2>
+    </div>
+    <div class="timeline">
+      <div class="tstep"><div class="dot"></div><h4>01 — Prise de contact</h4><p>Vous décrivez votre projet et votre terrain.</p></div>
+      <div class="tstep"><div class="dot"></div><h4>02 — Visite &amp; étude de sol</h4><p>Analyse topographique et de la nature du sol.</p></div>
+      <div class="tstep"><div class="dot"></div><h4>03 — Plans &amp; rendus 3D</h4><p>Proposition détaillée, ajustable selon vos retours.</p></div>
+      <div class="tstep"><div class="dot"></div><h4>04 — Devis chiffré</h4><p>Chiffrage précis avant tout démarrage de chantier.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Exemples</span>
+      <h2>Plans-types &amp; rendus</h2>
+      <p>Un aperçu de plans réalisés pour de précédents projets — chaque plan est ensuite adapté à votre terrain.</p>
+    </div>
+    <div class="grid-3">
+      {% for plan in plans_types %}
+        <div class="card">
+          <div class="card-media">
+            {% if plan.image %}
+              <img src="{{ plan.image.url }}" alt="{{ plan.titre }}" style="width:100%;height:100%;object-fit:cover;">
+            {% else %}
+              <svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="225" fill="#EFEAE1"/>
+              <rect x="40" y="40" width="220" height="150" fill="none" stroke="#27963C" stroke-width="2"/>
+              <line x1="150" y1="40" x2="150" y2="120" stroke="#7B7979" stroke-width="1.5"/>
+              </svg>
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <span class="card-tag">{{ plan.get_type_rendu_display }}{% if plan.superficie %} · {{ plan.superficie }}{% endif %}</span>
+            <h4>{{ plan.titre }}</h4>
+            {% if plan.description %}<p style="font-size:13px;color:var(--gray);margin-top:4px;">{{ plan.description }}</p>{% endif %}
+          </div>
+        </div>
+      {% empty %}
+        <div class="card"><div class="card-media"><svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="225" fill="#EFEAE1"/><rect x="40" y="40" width="220" height="150" fill="none" stroke="#27963C" stroke-width="2"/></svg></div><div class="card-body"><span class="card-tag">Plan · R+1</span><h4>Villa 4 pièces — 180 m²</h4></div></div>
+        <div class="card"><div class="card-media"><svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="225" fill="#EFEAE1"/><rect x="40" y="30" width="220" height="165" fill="none" stroke="#F14624" stroke-width="2"/></svg></div><div class="card-body"><span class="card-tag">Plan · Plain-pied</span><h4>Villa 3 pièces — 120 m²</h4></div></div>
+        <div class="card"><div class="card-media"><svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="225" fill="#EFEAE1"/><circle cx="150" cy="112" r="70" fill="none" stroke="#27963C" stroke-width="1.5"/></svg></div><div class="card-body"><span class="card-tag">Rendu 3D</span><h4>Implantation terrain — 500 m²</h4></div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="contact-form" style="background:var(--sable-deep);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Étape suivante</span>
+      <h2>Démarrer une étude</h2>
+      <p>Décrivez votre terrain et votre projet — nous revenons vers vous sous 48h ouvrées.</p>
+    </div>
+    <div class="form-card" style="max-width:760px;">
+      <form method="post" action="{% url 'conception:index' %}" class="mock-form">
+        {% csrf_token %}
+        <div class="form-grid">
+          <div class="field"><label>Nom complet *</label><input type="text" name="nom_complet" placeholder="Votre nom" required></div>
+          <div class="field"><label>Téléphone *</label><input type="tel" name="telephone" placeholder="+225 XX XX XX XX XX" required></div>
+          <div class="field full"><label>E-mail</label><input type="email" name="email" placeholder="vous@exemple.com"></div>
+          <div class="field"><label>Ville / localisation du terrain *</label><input type="text" name="ville_terrain" placeholder="Ex. Bingerville" required></div>
+          <div class="field"><label>Superficie du terrain</label><input type="text" name="superficie_terrain" placeholder="Ex. 500 m²"></div>
+          <div class="field full"><label>Type de projet</label>
+            <select name="type_projet">
+              {% for val, label in type_projets %}
+                <option value="{{ val }}">{{ label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="field full"><label>Votre projet en quelques mots</label><textarea name="message" placeholder="Décrivez vos besoins, contraintes, délais souhaités…"></textarea></div>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">Envoyer ma demande</button>
+        <p class="form-note">Réponse sous 48h ouvrées · Étude préliminaire gratuite.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band blueprint">
+  <div class="wrap">
+    <h2>Un terrain, un projet en tête&nbsp;?</h2>
+    <p>Parlons de votre étude de conception.</p>
+    <div class="cta-actions">
+      <a href="{% url 'contact:index' %}" class="btn btn-primary">Demander un devis</a>
+      <a href="tel:+22500000000" class="btn btn-ghost-light">Nous appeler</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

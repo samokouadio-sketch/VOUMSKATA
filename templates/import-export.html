@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Import-export — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span>D — Import-export</div>
+    <span class="eyebrow">D — Import-export</span>
+    <h1>Les bons matériaux,<br>au bon moment.</h1>
+    <p class="lead">Vente et location d'outils, fourniture de matériaux et d'équipements de construction — livrés directement sur votre chantier, partout en Côte d'Ivoire.</p>
+    <div class="page-hero-meta">
+      <div><b>48h</b><span>Délai de livraison Abidjan</span></div>
+      <div><b>Vente</b><span>+ Location</span></div>
+      <div><b>Sourcing</b><span>International</span></div>
+    </div>
+    <div class="pole-subnav">
+      <a href="{% url 'materiaux:index' %}" class="is-current">Vue d'ensemble</a>
+      <a href="{% url 'materiaux:materiaux' %}">Matériaux</a>
+      <a href="{% url 'materiaux:equipements' %}">Équipements</a>
+      <a href="{% url 'materiaux:engins' %}">Location d'engins</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="grid-3" style="margin-top:30px;">
+      {% for p in produits %}
+        <div class="product-card">
+          <div class="product-tag-row">
+            <svg class="product-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            <span class="pill pill-{{ p.type_offre }}">{{ p.get_type_offre_display }}</span>
+          </div>
+          <h4>{{ p.nom }}</h4>
+          <p>{{ p.description|default:p.categorie.nom }}</p>
+          <div class="card-meta" style="justify-content:space-between;">
+            <span class="mono" style="color:var(--anthracite);font-weight:600;">{{ p.prix_indicatif|default:"Sur devis" }}</span>
+            <a href="{% url 'contact:index' %}" class="pillar-cta" style="font-size:12.5px;">Devis →</a>
+          </div>
+        </div>
+      {% empty %}
+        <div class="product-card">
+          <div class="product-tag-row"><span class="pill pill-vente">Vente</span></div>
+          <h4>Ciment (sac 50kg)</h4>
+          <p>Livraison directe sur chantier</p>
+          <div class="card-meta" style="justify-content:space-between;"><span class="mono" style="color:var(--anthracite);font-weight:600;">À partir de 4 500 F</span><a href="{% url 'contact:index' %}" class="pillar-cta" style="font-size:12.5px;">Devis →</a></div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--sable-deep);">
+  <div class="wrap">
+    <div class="info-block orange">
+      <h4>Location d'engins, avec ou sans opérateur</h4>
+      <p>Pelles, grues et compacteurs disponibles à la location courte ou longue durée, livrés sur votre chantier avec opérateur certifié si nécessaire.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Devis fournisseur</span>
+      <h2>Demande de devis</h2>
+      <p>Indiquez les produits recherchés — nous revenons vers vous avec une offre chiffrée sous 48h.</p>
+    </div>
+    <div class="form-card" style="max-width:760px;">
+      <form method="post" action="{% url 'materiaux:index' %}" class="mock-form">
+        {% csrf_token %}
+        <div class="form-grid">
+          <div class="field"><label>Nom / entreprise *</label><input type="text" name="nom_entreprise" placeholder="Votre nom ou raison sociale" required></div>
+          <div class="field"><label>Téléphone *</label><input type="tel" name="telephone" placeholder="+225 XX XX XX XX XX" required></div>
+          <div class="field full"><label>Produit(s) recherché(s) *</label><textarea name="produits_recherches" placeholder="Ex. 200 sacs de ciment, location bétonnière 2 semaines…" required></textarea></div>
+          <div class="field"><label>Quantité estimée</label><input type="text" name="quantite_estimee" placeholder="Ex. 200 sacs"></div>
+          <div class="field"><label>Ville de livraison *</label><input type="text" name="ville_livraison" placeholder="Ex. Abidjan" required></div>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">Demander un devis</button>
+        <p class="form-note">Réponse sous 48h ouvrées.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band blueprint">
+  <div class="wrap">
+    <h2>Besoin de matériaux pour un chantier&nbsp;?</h2>
+    <p>Livraison directe, prix constants.</p>
+    <div class="cta-actions">
+      <a href="{% url 'contact:index' %}" class="btn btn-primary">Demander un devis</a>
+      <a href="tel:+22500000000" class="btn btn-ghost-light">Nous appeler</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

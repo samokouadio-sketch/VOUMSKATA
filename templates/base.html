@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}HABITAT Construction Sarl — L'immobilier de A à Z{% endblock %}</title>
+  <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="{% url 'vitrine:index' %}"><img class="logo-mark" src="{% static 'img/logo-color.png' %}" alt="HABITAT Construction Sarl"></a>
+    <nav class="navlinks">
+      <a href="{% url 'conception:index' %}" data-nav="conception" class="{% if active_nav == 'conception' %}is-active{% endif %}">Conception</a>
+      <a href="{% url 'realisations:index' %}" data-nav="realisation" class="{% if active_nav == 'realisation' %}is-active{% endif %}">Réalisation</a>
+      <a href="{% url 'gestion:index' %}" data-nav="gestion" class="{% if active_nav == 'gestion' %}is-active{% endif %}">Gestion</a>
+      <a href="{% url 'materiaux:index' %}" data-nav="import-export" class="{% if active_nav == 'import-export' %}is-active{% endif %}">Import-export</a>
+      <a href="{% url 'vitrine:a_propos' %}" data-nav="apropos" class="{% if active_nav == 'apropos' %}is-active{% endif %}">À propos</a>
+      <a href="{% url 'actualites:index' %}" data-nav="actualites" class="{% if active_nav == 'actualites' %}is-active{% endif %}">Actualités</a>
+      <a href="{% url 'contact:index' %}" data-nav="contact" class="{% if active_nav == 'contact' %}is-active{% endif %}">Contact</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <a href="{% url 'contact:index' %}" class="btn btn-primary">Demander un devis</a>
+      <button class="navtoggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+{% if messages %}
+<div class="wrap" style="margin-top: 15px; margin-bottom: 5px;">
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" style="padding: 14px 20px; border-radius: 6px; font-weight: 500; font-size: 14px; margin-bottom: 10px; {% if message.tags == 'success' %}background-color: #e6f4ea; color: #137333; border: 1px solid #ceead6;{% elif message.tags == 'error' %}background-color: #fce8e6; color: #c5221f; border: 1px solid #fad2cf;{% else %}background-color: #e8f0fe; color: #1a73e8; border: 1px solid #d2e3fc;{% endif %}">
+      {{ message }}
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="{% static 'img/logo-white.png' %}" alt="HABITAT Construction Sarl" style="height:32px;">
+        <p>L'immobilier de A à Z : conception, réalisation, gestion et import-export de matériaux, partout en Côte d'Ivoire.</p>
+      </div>
+      <div>
+        <h5>Expertises</h5>
+        <ul>
+          <li><a href="{% url 'conception:index' %}">A — Conception</a></li>
+          <li><a href="{% url 'realisations:index' %}">B — Réalisation</a></li>
+          <li><a href="{% url 'gestion:index' %}">C — Gestion</a></li>
+          <li><a href="{% url 'materiaux:index' %}">D — Import-export</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Entreprise</h5>
+        <ul>
+          <li><a href="{% url 'vitrine:a_propos' %}">À propos</a></li>
+          <li><a href="{% url 'actualites:index' %}">Actualités</a></li>
+          <li><a href="{% url 'vitrine:index' %}#temoignages">Témoignages</a></li>
+          <li><a href="{% url 'vitrine:mentions_legales' %}">Mentions légales</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li>Abidjan, Côte d'Ivoire</li>
+          <li>contact@habitat-construction.ci</li>
+          <li>+225 XX XX XX XX XX</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 HABITAT Construction Sarl. Tous droits réservés.</span>
+      <span><a href="{% url 'vitrine:mentions_legales' %}#confidentialite" style="color:inherit;">Politique de confidentialité</a> · HABITAT Construction Sarl</span>
+    </div>
+  </div>
+</footer>
+
+<script src="{% static 'js/main.js' %}" defer></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

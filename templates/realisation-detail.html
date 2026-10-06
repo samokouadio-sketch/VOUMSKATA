@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ realisation.titre }} — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section style="padding-bottom:0;">
+  <div class="wrap" style="padding-top:36px;">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span><a href="{% url 'realisations:index' %}">Réalisations</a><span class="sep">/</span>{{ realisation.titre }}</div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <span class="eyebrow">{{ realisation.get_type_bien_display }} · {{ realisation.ville }}</span>
+    <h1 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,4vw,46px);margin:14px 0 30px;">{{ realisation.titre }} — {{ realisation.superficie_m2 }} m²</h1>
+    <div class="card-media" style="aspect-ratio:1000/380;margin-bottom:52px;border:1px solid var(--line);">
+      {% if realisation.image_principale %}
+        <img src="{{ realisation.image_principale.url }}" alt="{{ realisation.titre }}" style="width:100%;height:100%;object-fit:cover;">
+      {% else %}
+        <svg viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg">
+          <rect width="1000" height="380" fill="#EFEAE1"/>
+          <polygon points="120,260 500,90 880,260" fill="none" stroke="#27963C" stroke-width="3.5"/>
+          <rect x="180" y="260" width="640" height="90" fill="none" stroke="#7B7979" stroke-width="2"/>
+        </svg>
+      {% endif %}
+    </div>
+
+    <div class="two-col">
+      <div class="stack">
+        <div>
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-size:21px;margin-bottom:14px;">Le projet</h3>
+          {% if realisation.description %}
+            <p style="color:#454340;font-size:15px;line-height:1.6;">{{ realisation.description|linebreaksbr }}</p>
+          {% else %}
+            <p style="color:#454340;font-size:15px;">Construction d'un projet {{ realisation.get_type_bien_display|lower }} d'une superficie de {{ realisation.superficie_m2 }} m² situé à {{ realisation.ville }}, livré en {{ realisation.annee_livraison }}.</p>
+          {% endif %}
+        </div>
+
+        {% if etapes %}
+        <div>
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-size:21px;margin:8px 0 20px;">Étapes du chantier</h3>
+          <div class="timeline" style="margin-top:0;">
+            {% for etape in etapes %}
+              <div class="tstep">
+                <div class="dot"></div>
+                <h4>{{ etape.titre }}</h4>
+                <p>{% if etape.duree %}Durée : {{ etape.duree }}{% endif %}{% if etape.description %} — {{ etape.description }}{% endif %}</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if galerie %}
+        <div>
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-size:21px;margin:16px 0 18px;">Galerie photo</h3>
+          <div class="gallery-grid">
+            {% for g in galerie %}
+              <div class="g-item">
+                <img src="{{ g.image.url }}" alt="{{ g.legende|default:realisation.titre }}" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+      <aside class="sticky">
+        <div class="spec-card">
+          <h5>Fiche technique</h5>
+          <div class="spec-row"><span>Type</span><span>{{ realisation.get_type_bien_display }}</span></div>
+          <div class="spec-row"><span>Superficie</span><span>{{ realisation.superficie_m2 }} m²</span></div>
+          {% if realisation.superficie_terrain_m2 %}
+            <div class="spec-row"><span>Terrain</span><span>{{ realisation.superficie_terrain_m2 }} m²</span></div>
+          {% endif %}
+          <div class="spec-row"><span>Durée</span><span>{{ realisation.duree_mois }} mois</span></div>
+          <div class="spec-row"><span>Livraison</span><span>{{ realisation.annee_livraison }}</span></div>
+          <div class="spec-row"><span>Localisation</span><span>{{ realisation.ville }}</span></div>
+        </div>
+        <a href="{% url 'contact:index' %}" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:18px;">Un projet similaire ?</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% if autres_realisations %}
+<section style="background:var(--sable-deep);">
+  <div class="wrap">
+    <div class="section-head"><span class="eyebrow">À voir aussi</span><h2>Autres réalisations</h2></div>
+    <div class="grid-3">
+      {% for autre in autres_realisations %}
+        <a class="card" href="{% url 'realisations:detail' slug=autre.slug %}">
+          <div class="card-media">
+            {% if autre.image_principale %}
+              <img src="{{ autre.image_principale.url }}" alt="{{ autre.titre }}" style="width:100%;height:100%;object-fit:cover;">
+            {% else %}
+              <svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="225" fill="#EFEAE1"/><polygon points="40,140 150,70 260,140" fill="none" stroke="#27963C" stroke-width="2.5"/><rect x="60" y="140" width="180" height="70" fill="none" stroke="#7B7979" stroke-width="1.5"/></svg>
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <span class="card-tag">{{ autre.get_type_bien_display }} · {{ autre.ville }}</span>
+            <h4>{{ autre.titre }} — {{ autre.superficie_m2 }} m²</h4>
+            <div class="card-meta"><span>Livré {{ autre.annee_livraison }}</span><span>{{ autre.duree_mois }} mois</span></div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

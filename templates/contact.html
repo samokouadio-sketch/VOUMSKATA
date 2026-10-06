@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span>Contact</div>
+    <span class="eyebrow">Contact</span>
+    <h1>Un projet immobilier ?<br>Parlons-en.</h1>
+    <p class="lead">Conception, réalisation, gestion ou import-export — dites-nous ce qu'il vous faut, nous orientons votre demande vers la bonne équipe.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap two-col">
+    <div class="form-card">
+      <form method="post" action="{% url 'contact:index' %}" class="mock-form">
+        {% csrf_token %}
+        <div class="form-grid">
+          <div class="field"><label>Nom complet *</label><input type="text" name="nom_complet" placeholder="Votre nom" required></div>
+          <div class="field"><label>Téléphone *</label><input type="tel" name="telephone" placeholder="+225 XX XX XX XX XX" required></div>
+          <div class="field full"><label>E-mail *</label><input type="email" name="email" placeholder="vous@exemple.com" required></div>
+          <div class="field full"><label>Vous nous contactez pour</label>
+            <select name="sujet">
+              {% for val, label in sujets %}
+                <option value="{{ val }}">{{ label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="field full"><label>Votre message *</label><textarea name="message" placeholder="Décrivez votre besoin…" required></textarea></div>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">Envoyer le message</button>
+        <p class="form-note">Réponse sous 72h ouvrées, selon le pôle concerné.</p>
+      </form>
+    </div>
+
+    <aside class="stack">
+      <div class="spec-card">
+        <h5>Coordonnées</h5>
+        <div class="spec-row"><span>Adresse</span><span>Abidjan, Côte d'Ivoire</span></div>
+        <div class="spec-row"><span>Téléphone</span><span>+225 XX XX XX XX XX</span></div>
+        <div class="spec-row"><span>E-mail</span><span>contact@habitat-construction.ci</span></div>
+        <div class="spec-row"><span>Horaires</span><span>Lun–Ven 8h–18h</span></div>
+        <div class="spec-row"><span>Samedi</span><span>9h–13h</span></div>
+      </div>
+      <div class="card-media" style="border:1px solid var(--line);">
+        <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="260" fill="#EFEAE1"/>
+          <g stroke="#7B7979" stroke-opacity=".3" stroke-width="1">
+            <line x1="0" y1="60" x2="400" y2="60"/><line x1="0" y1="120" x2="400" y2="120"/><line x1="0" y1="180" x2="400" y2="180"/>
+            <line x1="80" y1="0" x2="80" y2="260"/><line x1="180" y1="0" x2="180" y2="260"/><line x1="280" y1="0" x2="280" y2="260"/>
+          </g>
+          <path d="M60 220 Q150 40 340 90" stroke="#F14624" stroke-width="2.5" fill="none" stroke-dasharray="1 0"/>
+          <circle cx="205" cy="120" r="9" fill="#27963C"/>
+          <path d="M205 108c-10 0-18 8-18 18 0 13 18 30 18 30s18-17 18-30c0-10-8-18-18-18z" fill="#27963C"/>
+          <circle cx="205" cy="126" r="6" fill="#EFEAE1"/>
+        </svg>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section style="background:var(--sable-deep);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Questions fréquentes</span>
+      <h2>Avant de nous écrire</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card"><div class="card-body" style="padding:24px;">
+        <h4 style="font-size:16px;margin-bottom:8px;">L'étude préliminaire est-elle payante ?</h4>
+        <p style="font-size:13.5px;color:var(--gray);">Non, la première visite et l'étude de faisabilité sont gratuites pour tout projet de conception.</p>
+      </div></div>
+      <div class="card"><div class="card-body" style="padding:24px;">
+        <h4 style="font-size:16px;margin-bottom:8px;">Intervenez-vous hors d'Abidjan ?</h4>
+        <p style="font-size:13.5px;color:var(--gray);">Oui, selon la localisation et l'ampleur du projet — précisez la ville dans votre message.</p>
+      </div></div>
+      <div class="card"><div class="card-body" style="padding:24px;">
+        <h4 style="font-size:16px;margin-bottom:8px;">Puis-je confier la gestion d'un bien déjà loué ?</h4>
+        <p style="font-size:13.5px;color:var(--gray);">Oui, nous reprenons la gestion de biens déjà occupés, avec transition sans interruption des loyers.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

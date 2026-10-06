@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ article.titre }} — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section style="padding-bottom:0;">
+  <div class="wrap" style="padding-top:36px;">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span><a href="{% url 'actualites:index' %}">Actualités</a><span class="sep">/</span>{{ article.titre }}</div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap" style="max-width:860px;">
+    <span class="eyebrow">Article · {{ article.date_publication|date:"d F Y" }}</span>
+    <h1 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,3.5vw,42px);margin:14px 0 20px;">{{ article.titre }}</h1>
+    
+    {% if article.image %}
+      <div class="card-media" style="aspect-ratio:16/9;margin-bottom:30px;border-radius:6px;overflow:hidden;">
+        <img src="{{ article.image.url }}" alt="{{ article.titre }}" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    {% endif %}
+
+    <div class="prose" style="font-size:16px;line-height:1.7;color:#333;">
+      <p style="font-weight:600;font-size:18px;color:var(--anthracite);margin-bottom:24px;">{{ article.extrait }}</p>
+      <div>{{ article.contenu|linebreaksbr }}</div>
+    </div>
+  </div>
+</section>
+
+{% if articles_recents %}
+<section style="background:var(--sable-deep);margin-top:60px;">
+  <div class="wrap">
+    <div class="section-head"><span class="eyebrow">À lire aussi</span><h2>Autres articles</h2></div>
+    <div class="grid-3">
+      {% for art in articles_recents %}
+        <a class="blog-card" href="{% url 'actualites:detail' slug=art.slug %}">
+          <div class="card-media">
+            {% if art.image %}
+              <img src="{{ art.image.url }}" alt="{{ art.titre }}" style="width:100%;height:100%;object-fit:cover;">
+            {% else %}
+              <svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="225" fill="#EFEAE1"/><polygon points="40,140 150,70 260,140" fill="none" stroke="#27963C" stroke-width="2.5"/><rect x="60" y="140" width="180" height="70" fill="none" stroke="#7B7979" stroke-width="1.5"/></svg>
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <span class="blog-date">{{ art.date_publication|date:"d F Y" }}</span>
+            <h4>{{ art.titre }}</h4>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

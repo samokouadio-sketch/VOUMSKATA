@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ bien.titre }} — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section style="padding-bottom:0;">
+  <div class="wrap" style="padding-top:36px;">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span><a href="{% url 'gestion:index' %}">Gestion</a><span class="sep">/</span>{{ bien.titre }}</div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <span class="eyebrow">{{ bien.get_transaction_display }} · {{ bien.ville }}{% if bien.quartier %} ({{ bien.quartier }}){% endif %}</span>
+    <h1 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,4vw,46px);margin:14px 0 30px;">{{ bien.titre }}</h1>
+    
+    <div class="card-media" style="aspect-ratio:1000/380;margin-bottom:40px;border:1px solid var(--line);">
+      {% if bien.image_principale %}
+        <img src="{{ bien.image_principale.url }}" alt="{{ bien.titre }}" style="width:100%;height:100%;object-fit:cover;">
+      {% else %}
+        <svg viewBox="0 0 1000 380" xmlns="http://www.w3.org/2000/svg">
+          <rect width="1000" height="380" fill="#EFEAE1"/>
+          <polygon points="120,260 500,90 880,260" fill="none" stroke="#27963C" stroke-width="3.5"/>
+          <rect x="180" y="260" width="640" height="90" fill="none" stroke="#7B7979" stroke-width="2"/>
+        </svg>
+      {% endif %}
+    </div>
+
+    <div class="two-col">
+      <div class="stack">
+        <div>
+          <h3 style="font-family:'Space Grotesk',sans-serif;font-size:21px;margin-bottom:14px;">Description du bien</h3>
+          {% if bien.description %}
+            <p style="color:#454340;font-size:15px;line-height:1.6;">{{ bien.description|linebreaksbr }}</p>
+          {% else %}
+            <p style="color:#454340;font-size:15px;">Bien immobilier de type {{ bien.get_type_bien_display|lower }} situé à {{ bien.ville }}{% if bien.quartier %}, quartier {{ bien.quartier }}{% endif %}.</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <aside class="sticky">
+        <div class="spec-card">
+          <h5>Caractéristiques</h5>
+          <div class="spec-row"><span>Prix</span><span style="font-weight:700;color:var(--orange);">{{ bien.prix }} FCFA</span></div>
+          <div class="spec-row"><span>Transaction</span><span>{{ bien.get_transaction_display }}</span></div>
+          <div class="spec-row"><span>Type</span><span>{{ bien.get_type_bien_display }}</span></div>
+          <div class="spec-row"><span>Chambres</span><span>{{ bien.chambres }}</span></div>
+          <div class="spec-row"><span>Superficie</span><span>{{ bien.superficie_m2 }} m²</span></div>
+          <div class="spec-row"><span>Statut</span><span>{{ bien.get_statut_display }}</span></div>
+          <div class="spec-row"><span>Ville</span><span>{{ bien.ville }}</span></div>
+        </div>
+        <a href="{% url 'contact:index' %}" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:18px;">Programmer une visite</a>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}

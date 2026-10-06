@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Gros œuvre & Matériaux — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span><a href="{% url 'materiaux:index' %}">Import-export</a><span class="sep">/</span>Matériaux</div>
+    <span class="eyebrow">D — Import-export</span>
+    <h1>Gros œuvre &amp; Matériaux</h1>
+    <p class="lead">Ciment, fer à béton, agglos et agrégats fournis aux professionnels et particuliers partout en Côte d'Ivoire.</p>
+    <div class="pole-subnav">
+      <a href="{% url 'materiaux:index' %}">Vue d'ensemble</a>
+      <a href="{% url 'materiaux:materiaux' %}" class="is-current">Matériaux</a>
+      <a href="{% url 'materiaux:equipements' %}">Équipements</a>
+      <a href="{% url 'materiaux:engins' %}">Location d'engins</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="grid-3" style="margin-top:30px;">
+      {% for p in produits %}
+        <div class="product-card">
+          <div class="product-tag-row">
+            <span class="pill pill-{{ p.type_offre }}">{{ p.get_type_offre_display }}</span>
+          </div>
+          <h4>{{ p.nom }}</h4>
+          <p>{{ p.description }}</p>
+          <div class="card-meta" style="justify-content:space-between;">
+            <span class="mono" style="color:var(--anthracite);font-weight:600;">{{ p.prix_indicatif|default:"Sur devis" }}</span>
+            <a href="{% url 'contact:index' %}" class="pillar-cta" style="font-size:12.5px;">Devis →</a>
+          </div>
+        </div>
+      {% empty %}
+        <p style="grid-column:1/-1; color:var(--gray);">Aucun produit répertorié pour le moment.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

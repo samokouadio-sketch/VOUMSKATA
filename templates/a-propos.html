@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}À propos — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span>À propos</div>
+    <span class="eyebrow">À propos</span>
+    <h1>Une seule entreprise,<br>tout le cycle de vie du bien.</h1>
+    <p class="lead">HABITAT Construction Sarl est née d'un constat simple : entre l'architecte, l'entreprise de construction, l'agence immobilière et le fournisseur de matériaux, les projets se perdent. Nous avons réuni les quatre métiers sous un même toit.</p>
+    <div class="page-hero-meta">
+      <div><b>9</b><span>Années d'expérience</span></div>
+      <div><b>120+</b><span>Chantiers livrés</span></div>
+      <div><b>300+</b><span>Biens en gestion</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Nos valeurs</span>
+      <h2>Ce qui guide chaque projet</h2>
+    </div>
+    <div class="grid-3">
+      {% for v in valeurs %}
+        <div class="value-card">
+          <h4>{{ v.titre }}</h4>
+          <p>{{ v.description }}</p>
+        </div>
+      {% empty %}
+        <div class="value-card"><h4>Transparence</h4><p>Devis détaillés, délais annoncés et tenus, aucune surprise en cours de chantier.</p></div>
+        <div class="value-card"><h4>Intégration</h4><p>Conception, réalisation, gestion et matériaux gérés par la même équipe, du début à la fin.</p></div>
+        <div class="value-card"><h4>Exigence technique</h4><p>Conformité aux normes ivoiriennes à chaque étape, du sol aux finitions.</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--sable-deep);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">L'équipe</span>
+      <h2>Les pôles, et les gens derrière</h2>
+      <p>Une équipe dédiée par pôle d'activité, coordonnée pour que votre projet avance sans rupture entre les métiers.</p>
+    </div>
+    <div class="grid-3">
+      {% for membre in equipe %}
+        <div class="team-card">
+          <div class="team-avatar">
+            {% if membre.photo %}
+              <img src="{{ membre.photo.url }}" alt="{{ membre.nom }}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+            {% else %}
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7B7979" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+            {% endif %}
+          </div>
+          <h4>{{ membre.nom }}</h4>
+          <span>{{ membre.poste }}</span>
+        </div>
+      {% empty %}
+        <div class="team-card"><div class="team-avatar"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7B7979" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><h4>Responsable Conception</h4><span>Pôle A</span></div>
+        <div class="team-card"><div class="team-avatar"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7B7979" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><h4>Chef de chantier</h4><span>Pôle B</span></div>
+        <div class="team-card"><div class="team-avatar"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7B7979" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><h4>Gestionnaire de biens</h4><span>Pôle C</span></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Certifications</span>
+      <h2>Conformité &amp; agréments</h2>
+      <p>HABITAT Construction Sarl opère en conformité avec la réglementation ivoirienne du secteur BTP et immobilier — références et agréments détaillés sur demande.</p>
+    </div>
+    {% if certifications %}
+      <div class="grid-3">
+        {% for certif in certifications %}
+          <div class="card" style="padding:20px;">
+            <h4>{{ certif.nom }}</h4>
+            {% if certif.description %}<p style="font-size:14px;color:var(--gray);margin-top:6px;">{{ certif.description }}</p>{% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="cta-band blueprint">
+  <div class="wrap">
+    <h2>Un projet immobilier&nbsp;? Parlons-en.</h2>
+    <p>Étude gratuite, devis sous 72h ouvrées.</p>
+    <div class="cta-actions">
+      <a href="{% url 'contact:index' %}" class="btn btn-primary">Demander un devis</a>
+      <a href="tel:+22500000000" class="btn btn-ghost-light">Nous appeler</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Plans 2D & Rendus 3D — Conception — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span><a href="{% url 'conception:index' %}">Conception</a><span class="sep">/</span>Plans 2D/3D</div>
+    <span class="eyebrow">A — Conception</span>
+    <h1>Plans 2D &amp; Rendus 3D</h1>
+    <p class="lead">Visualisez votre projet en haute définition avant le premier coup de pioche.</p>
+    <div class="pole-subnav">
+      <a href="{% url 'conception:index' %}">Vue d'ensemble</a>
+      <a href="{% url 'conception:etude_conseil' %}">Étude & conseil</a>
+      <a href="{% url 'conception:plans_3d' %}" class="is-current">Plans 2D/3D</a>
+      <a href="{% url 'conception:devis' %}">Devis</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Exemples de rendus</span>
+      <h2>Plans-types et modélisations 3D</h2>
+    </div>
+    <div class="grid-3">
+      {% for plan in plans_types %}
+        <div class="card">
+          <div class="card-media">
+            {% if plan.image %}
+              <img src="{{ plan.image.url }}" alt="{{ plan.titre }}" style="width:100%;height:100%;object-fit:cover;">
+            {% else %}
+              <svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="225" fill="#EFEAE1"/><rect x="40" y="40" width="220" height="150" fill="none" stroke="#27963C" stroke-width="2"/></svg>
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <span class="card-tag">{{ plan.get_type_rendu_display }}</span>
+            <h4>{{ plan.titre }}</h4>
+          </div>
+        </div>
+      {% empty %}
+        <div class="card"><div class="card-media"><svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="225" fill="#EFEAE1"/><rect x="40" y="40" width="220" height="150" fill="none" stroke="#27963C" stroke-width="2"/></svg></div><div class="card-body"><span class="card-tag">Plan · R+1</span><h4>Villa 4 pièces — 180 m²</h4></div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

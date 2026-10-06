@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Gestion locative — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span><a href="{% url 'gestion:index' %}">Gestion</a><span class="sep">/</span>Gestion locative</div>
+    <span class="eyebrow">C — Gestion locative</span>
+    <h1>Gestion locative sur-mesure</h1>
+    <p class="lead">Recherche de locataires solvables, rédaction des baux, recouvrement des loyers et entretien régulier.</p>
+    <div class="pole-subnav">
+      <a href="{% url 'gestion:index' %}">Vue d'ensemble</a>
+      <a href="{% url 'gestion:louer' %}">Louer</a>
+      <a href="{% url 'gestion:vendre' %}">Vendre</a>
+      <a href="{% url 'gestion:locative' %}" class="is-current">Gestion locative</a>
+      <a href="{% url 'gestion:acd' %}">ACD</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap two-col">
+    <div class="prose">
+      <h3>Pourquoi nous confier votre bien ?</h3>
+      <p>La gestion d'un bien immobilier demande du temps, de la rigueur et une parfaite connaissance des lois et règlements locaux. HABITAT Construction s'occupe de l'intégralité du processus.</p>
+      <ul>
+        <li>Sélection rigoureuse des candidats locataires</li>
+        <li>Recouvrement mensuel des loyers et relances si nécessaire</li>
+        <li>Gestion des réparations et entretien courant</li>
+        <li>Comptabilité claire et reversements réguliers aux propriétaires</li>
+      </ul>
+    </div>
+    <aside class="sticky">
+      <div class="info-block">
+        <h4>Confier mon bien</h4>
+        <p>Contactez notre équipe de gestion pour obtenir un mandat adapté à votre patrimoine.</p>
+      </div>
+      <a href="{% url 'gestion:index' %}#confier" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:18px;">Confier mon bien</a>
+    </aside>
+  </div>
+</section>
+{% endblock %}

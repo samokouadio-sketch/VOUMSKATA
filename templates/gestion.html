@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Gestion immobilière — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span>C — Gestion immobilière</div>
+    <span class="eyebrow">C — Gestion immobilière</span>
+    <h1>Votre bien, géré comme<br>si c'était le nôtre.</h1>
+    <p class="lead">Location, vente, recouvrement des loyers, entretien et acquisition de l'ACD — nous gérons, vous encaissez.</p>
+    <div class="page-hero-meta">
+      <div><b>300+</b><span>Biens en gestion</span></div>
+      <div><b>98%</b><span>Loyers recouvrés</span></div>
+      <div><b>&lt;5j</b><span>Délai moyen de relocation</span></div>
+    </div>
+    <div class="pole-subnav">
+      <a href="{% url 'gestion:index' %}" class="is-current">Vue d'ensemble</a>
+      <a href="{% url 'gestion:louer' %}">Louer</a>
+      <a href="{% url 'gestion:vendre' %}">Vendre</a>
+      <a href="{% url 'gestion:locative' %}">Gestion locative</a>
+      <a href="{% url 'gestion:acd' %}">ACD</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="tabs">
+      <button class="tab is-active" data-target="#panel-louer">À louer</button>
+      <button class="tab" data-target="#panel-vendre">À vendre</button>
+    </div>
+
+    <div class="grid-3 tab-panel" id="panel-louer" style="display:grid;">
+      {% for bien in biens %}
+        {% if bien.transaction == 'louer' %}
+          <a class="property-card" href="{% url 'gestion:detail_bien' pk=bien.pk %}">
+            <div class="property-media">
+              {% if bien.image_principale %}
+                <img src="{{ bien.image_principale.url }}" alt="{{ bien.titre }}" style="width:100%;height:100%;object-fit:cover;">
+              {% else %}
+                <svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="225" fill="#EFEAE1"/><polygon points="40,140 150,70 260,140" fill="none" stroke="#27963C" stroke-width="2.5"/><rect x="60" y="140" width="180" height="70" fill="none" stroke="#7B7979" stroke-width="1.5"/></svg>
+              {% endif %}
+              <span class="property-price">{{ bien.prix }} F/mois</span>
+              <span class="property-badge">À louer</span>
+            </div>
+            <div class="property-body">
+              <span class="card-tag">{{ bien.ville }}{% if bien.quartier %} · {{ bien.quartier }}{% endif %}</span>
+              <h4>{{ bien.titre }}</h4>
+              <div class="property-specs"><span>{{ bien.chambres }} ch.</span><span>{{ bien.superficie_m2 }} m²</span></div>
+            </div>
+          </a>
+        {% endif %}
+      {% empty %}
+        <p style="grid-column:1/-1; color:var(--gray);">Aucun bien actuellement disponible à la location.</p>
+      {% endfor %}
+    </div>
+
+    <div class="grid-3 tab-panel" id="panel-vendre" style="display:none;">
+      {% for bien in biens %}
+        {% if bien.transaction == 'vendre' %}
+          <a class="property-card" href="{% url 'gestion:detail_bien' pk=bien.pk %}">
+            <div class="property-media">
+              {% if bien.image_principale %}
+                <img src="{{ bien.image_principale.url }}" alt="{{ bien.titre }}" style="width:100%;height:100%;object-fit:cover;">
+              {% else %}
+                <svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="225" fill="#EFEAE1"/><polygon points="40,140 150,70 260,140" fill="none" stroke="#F14624" stroke-width="2.5"/><rect x="60" y="140" width="180" height="70" fill="none" stroke="#7B7979" stroke-width="1.5"/></svg>
+              {% endif %}
+              <span class="property-price">{{ bien.prix }} FCFA</span>
+              <span class="property-badge">À vendre</span>
+            </div>
+            <div class="property-body">
+              <span class="card-tag">{{ bien.ville }}{% if bien.quartier %} · {{ bien.quartier }}{% endif %}</span>
+              <h4>{{ bien.titre }}</h4>
+              <div class="property-specs"><span>{{ bien.chambres }} ch.</span><span>{{ bien.superficie_m2 }} m²</span></div>
+            </div>
+          </a>
+        {% endif %}
+      {% empty %}
+        <p style="grid-column:1/-1; color:var(--gray);">Aucun bien actuellement disponible à la vente.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--sable-deep);">
+  <div class="wrap">
+    <div class="info-block">
+      <h4>Qu'est-ce que l'ACD ?</h4>
+      <p>L'Attestation de Concession Définitive (ACD) sécurise juridiquement votre terrain. Nous accompagnons son acquisition en parallèle de vos démarches de construction ou de vente, pour un dossier complet et opposable.</p>
+    </div>
+  </div>
+</section>
+
+<section id="confier">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Propriétaires</span>
+      <h2>Vous êtes propriétaire ?</h2>
+      <p>Confiez-nous la location, la vente ou l'entretien de votre bien — nous nous occupons du reste, y compris du recouvrement des loyers.</p>
+    </div>
+    <div class="form-card" style="max-width:760px;">
+      <form method="post" action="{% url 'gestion:index' %}" class="mock-form">
+        {% csrf_token %}
+        <div class="form-grid">
+          <div class="field"><label>Nom complet *</label><input type="text" name="nom_complet" placeholder="Votre nom" required></div>
+          <div class="field"><label>Téléphone *</label><input type="tel" name="telephone" placeholder="+225 XX XX XX XX XX" required></div>
+          <div class="field"><label>Type de bien</label>
+            <select name="type_bien">
+              {% for val, label in types_bien %}
+                <option value="{{ val }}">{{ label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="field"><label>Objectif</label>
+            <select name="objectif">
+              {% for val, label in objectifs %}
+                <option value="{{ val }}">{{ label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="field full"><label>Adresse du bien *</label><input type="text" name="adresse_bien" placeholder="Quartier, ville" required></div>
+          <div class="field full"><label>Précisions</label><textarea name="message" placeholder="État du bien, superficie, disponibilité…"></textarea></div>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">Confier mon bien</button>
+        <p class="form-note">Estimation et réponse sous 72h ouvrées.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band blueprint">
+  <div class="wrap">
+    <h2>Un bien à confier ou à trouver&nbsp;?</h2>
+    <p>Notre équipe gestion vous répond sous 72h.</p>
+    <div class="cta-actions">
+      <a href="{% url 'contact:index' %}" class="btn btn-primary">Demander un devis</a>
+      <a href="tel:+22500000000" class="btn btn-ghost-light">Nous appeler</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

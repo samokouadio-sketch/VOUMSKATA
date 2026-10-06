@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Acquisition de l'ACD — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span><a href="{% url 'gestion:index' %}">Gestion</a><span class="sep">/</span>ACD</div>
+    <span class="eyebrow">C — ACD</span>
+    <h1>Sécurisez votre terrain<br>avec l'ACD.</h1>
+    <p class="lead">L'Attestation de Concession Définitive protège juridiquement votre propriété. Nous accompagnons son acquisition de A à Z.</p>
+    <div class="pole-subnav">
+      <a href="{% url 'gestion:index' %}">Vue d'ensemble</a>
+      <a href="{% url 'gestion:louer' %}">Louer</a>
+      <a href="{% url 'gestion:vendre' %}">Vendre</a>
+      <a href="{% url 'gestion:locative' %}">Gestion locative</a>
+      <a href="{% url 'gestion:acd' %}" class="is-current">ACD</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap two-col">
+    <div class="prose">
+      <h3>Qu'est-ce que l'ACD ?</h3>
+      <p>L'Attestation de Concession Définitive (ACD) est le titre qui sécurise juridiquement un terrain en Côte d'Ivoire. Elle est indispensable avant toute construction durable et facilite la revente ou la mise en garantie du bien.</p>
+      <h3>Notre accompagnement</h3>
+      <ul>
+        <li>Vérification de la situation foncière du terrain</li>
+        <li>Constitution et dépôt du dossier auprès des autorités compétentes</li>
+        <li>Suivi de l'instruction et relances administratives</li>
+        <li>Remise du titre sécurisé au propriétaire</li>
+      </ul>
+    </div>
+    <aside class="sticky">
+      <div class="info-block">
+        <h4>Pourquoi ne pas attendre</h4>
+        <p>Un terrain sans ACD reste juridiquement vulnérable — litiges, doubles ventes, difficultés de revente. Régulariser tôt évite des complications coûteuses plus tard.</p>
+      </div>
+      <a href="{% url 'contact:index' %}" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:18px;">Démarrer ma démarche ACD</a>
+    </aside>
+  </div>
+</section>
+
+<section class="cta-band blueprint">
+  <div class="wrap">
+    <h2>Un projet immobilier&nbsp;? Parlons-en.</h2>
+    <p>Étude gratuite, devis sous 72h ouvrées.</p>
+    <div class="cta-actions">
+      <a href="{% url 'contact:index' %}" class="btn btn-primary">Demander un devis</a>
+      <a href="tel:+22500000000" class="btn btn-ghost-light">Nous appeler</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

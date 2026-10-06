@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Actualités — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span>Actualités</div>
+    <span class="eyebrow">Actualités</span>
+    <h1>Conseils, chantiers<br>et actualités du secteur.</h1>
+    <p class="lead">Nos pôles A/B/C/D partagent régulièrement des conseils pratiques et les avancées de leurs projets.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="grid-3" style="margin-top:30px;">
+      {% for art in articles %}
+        <a class="blog-card" href="{% url 'actualites:detail' slug=art.slug %}">
+          <div class="card-media">
+            {% if art.image %}
+              <img src="{{ art.image.url }}" alt="{{ art.titre }}" style="width:100%;height:100%;object-fit:cover;">
+            {% else %}
+              <svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="225" fill="#EFEAE1"/><polygon points="40,140 150,70 260,140" fill="none" stroke="#27963C" stroke-width="2.5"/><rect x="60" y="140" width="180" height="70" fill="none" stroke="#7B7979" stroke-width="1.5"/></svg>
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <span class="blog-date">{{ art.date_publication|date:"d F Y" }}</span>
+            <h4>{{ art.titre }}</h4>
+            <p style="font-size:13.5px;color:var(--gray);margin-top:6px;">{{ art.extrait }}</p>
+          </div>
+        </a>
+      {% empty %}
+        <p style="grid-column:1/-1; color:var(--gray);">Aucun article publié pour le moment.</p>
+      {% endfor %}
+    </div>
+
+    {% if page_obj.has_other_pages %}
+      <div style="text-align:center;margin-top:44px;display:flex;justify-content:center;gap:10px;">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-ghost">Précédent</a>
+        {% endif %}
+        <span style="align-self:center;font-weight:600;">Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}" class="btn btn-ghost">Suivant</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="cta-band blueprint">
+  <div class="wrap">
+    <h2>Un projet immobilier&nbsp;? Parlons-en.</h2>
+    <p>Étude gratuite, devis sous 72h ouvrées.</p>
+    <div class="cta-actions">
+      <a href="{% url 'contact:index' %}" class="btn btn-primary">Demander un devis</a>
+      <a href="tel:+22500000000" class="btn btn-ghost-light">Nous appeler</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

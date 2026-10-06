@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Devis Conception — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span><a href="{% url 'conception:index' %}">Conception</a><span class="sep">/</span>Devis</div>
+    <span class="eyebrow">A — Conception</span>
+    <h1>Devis détaillé et chiffrage transparent</h1>
+    <p class="lead">Un chiffrage poste par poste élaboré avant tout engagement de votre part.</p>
+    <div class="pole-subnav">
+      <a href="{% url 'conception:index' %}">Vue d'ensemble</a>
+      <a href="{% url 'conception:etude_conseil' %}">Étude & conseil</a>
+      <a href="{% url 'conception:plans_3d' %}">Plans 2D/3D</a>
+      <a href="{% url 'conception:devis' %}" class="is-current">Devis</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap two-col">
+    <div class="prose">
+      <h3>Ce que comprend notre devis</h3>
+      <p>Pas de coûts cachés ou de mauvaises surprises. Nos devis détaillent chaque poste de dépenses pour une visibilité complète.</p>
+      <ul>
+        <li>Étude de sol et travaux de terrassement</li>
+        <li>Gros œuvre et maçonnerie</li>
+        <li>Second œuvre (électricité, plomberie, menuiserie)</li>
+        <li>Finitions et livraisons sur chantier</li>
+      </ul>
+    </div>
+    <aside class="sticky">
+      <div class="info-block">
+        <h4>Devis sous 72h</h4>
+        <p>Recevez une estimation complète sous 72 heures ouvrées.</p>
+      </div>
+      <a href="{% url 'conception:index' %}#contact-form" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:18px;">Demander un devis</a>
+    </aside>
+  </div>
+</section>
+{% endblock %}

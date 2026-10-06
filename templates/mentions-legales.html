@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Mentions légales — HABITAT Construction Sarl{% endblock %}
+
+{% block content %}
+<section class="page-hero blueprint">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="{% url 'vitrine:index' %}">Accueil</a><span class="sep">/</span>Mentions légales</div>
+    <span class="eyebrow">Informations légales</span>
+    <h1>Mentions légales</h1>
+    <p class="lead">Informations relatives à l'éditeur et aux conditions d'utilisation du site.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap" style="max-width:860px;">
+    <div class="prose" style="font-size:15px;line-height:1.7;">
+      <h3>Éditeur du site</h3>
+      <p>HABITAT Construction Sarl<br>Siège social : Abidjan, Côte d'Ivoire<br>Téléphone : +225 XX XX XX XX XX<br>E-mail : contact@habitat-construction.ci</p>
+
+      <h3 id="confidentialite" style="margin-top:30px;">Politique de confidentialité & Données personnelles</h3>
+      <p>Les informations recueillies dans les formulaires du site (demandes d'étude, de devis, de gestion ou contact) sont destinées exclusivement au traitement de vos demandes par les équipes d'HABITAT Construction Sarl. Elles ne sont en aucun cas cédées ni vendues à des tiers.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}HABITAT Construction Sarl — L'immobilier de A à Z{% endblock %}
+
+{% block content %}
+<section class="hero blueprint">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Habitat Construction Sarl · Côte d'Ivoire</span>
+      <h1>L'immobilier<br><em>de A à Z.</em></h1>
+      <div class="cycler-line">On s'occupe de tout : <span class="cycler" id="cycler">Concevoir</span></div>
+      <p class="lead">Conception, réalisation, gestion locative et import-export de matériaux — un seul interlocuteur pour l'ensemble de votre projet immobilier, partout en Côte d'Ivoire.</p>
+      <div class="hero-ctas">
+        <a href="{% url 'contact:index' %}" class="btn btn-primary">Demander un devis</a>
+        <a href="{% url 'realisations:index' %}" class="btn btn-ghost">Voir nos réalisations</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="40" y="180" width="320" height="170" fill="#EFEAE1" stroke="#211F1E" stroke-opacity=".18"/>
+        <rect x="70" y="210" width="60" height="140" fill="none" stroke="#7B7979" stroke-width="1.5"/>
+        <rect x="150" y="230" width="50" height="120" fill="none" stroke="#7B7979" stroke-width="1.5"/>
+        <polygon points="40,180 200,90 360,180" fill="none" stroke="#27963C" stroke-width="3"/>
+        <rect x="230" y="240" width="90" height="110" fill="none" stroke="#F14624" stroke-width="2.5"/>
+        <line x1="230" y1="270" x2="320" y2="270" stroke="#F14624" stroke-width="1.5"/>
+        <line x1="230" y1="300" x2="320" y2="300" stroke="#F14624" stroke-width="1.5"/>
+        <line x1="230" y1="330" x2="320" y2="330" stroke="#F14624" stroke-width="1.5"/>
+        <circle cx="200" cy="90" r="4" fill="#27963C"/>
+        <line x1="200" y1="90" x2="200" y2="60" stroke="#27963C" stroke-width="2"/>
+        <line x1="20" y1="350" x2="380" y2="350" stroke="#211F1E" stroke-width="2"/>
+        <g stroke="#211F1E" stroke-opacity=".25" stroke-width="1">
+          <line x1="20" y1="358" x2="30" y2="350"/><line x1="45" y1="358" x2="55" y2="350"/>
+          <line x1="70" y1="358" x2="80" y2="350"/><line x1="95" y1="358" x2="105" y2="350"/>
+          <line x1="300" y1="358" x2="310" y2="350"/><line x1="325" y1="358" x2="335" y2="350"/>
+          <line x1="350" y1="358" x2="360" y2="350"/><line x1="375" y1="358" x2="385" y2="350"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="stats blueprint">
+  <div class="wrap">
+    {% for stat in stats %}
+      <div class="stat"><b>{{ stat.valeur }}</b><span>{{ stat.libelle }}</span></div>
+    {% empty %}
+      <div class="stat"><b>120<span style="font-size:.55em;">+</span></b><span>Chantiers livrés</span></div>
+      <div class="stat"><b>48 000</b><span>m² construits</span></div>
+      <div class="stat"><b>9</b><span>Années d'expérience</span></div>
+      <div class="stat"><b>300<span style="font-size:.55em;">+</span></b><span>Biens en gestion</span></div>
+    {% endfor %}
+  </div>
+</div>
+
+<section id="pillars" class="pillars">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Nos 4 expertises</span>
+      <h2>Un seul partenaire, toute la chaîne de valeur</h2>
+      <p>De l'idée au bien livré, puis géré dans la durée — chaque pôle s'appuie sur les trois autres.</p>
+    </div>
+  </div>
+
+  <div class="pillar-row active">
+    <div class="pillar-letter">A</div>
+    <div class="wrap-inner pillar-body" style="max-width:calc(1180px - 110px);">
+      <div>
+        <span class="tag">Conception</span>
+        <h3>Des projets pensés pour votre terrain, pas sur catalogue</h3>
+        <p style="color:var(--gray);font-size:14.5px;">Conseil sur le type de projet, respect des normes, prise en compte de la topographie et de la nature du sol.</p>
+      </div>
+      <div>
+        <ul>
+          <li>Conseils normes, souhaits du client, topographie et sol</li>
+          <li>Plans 2D et rendus 3D détaillés</li>
+          <li>Devis élaborés avant tout engagement</li>
+        </ul>
+        <a href="{% url 'conception:index' %}" class="pillar-cta">Démarrer une étude →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pillar-row">
+    <div class="pillar-letter">B</div>
+    <div class="pillar-body" style="max-width:calc(1180px - 110px);">
+      <div>
+        <span class="tag">Réalisation</span>
+        <h3>Des professionnels du bâtiment à votre service</h3>
+        <p style="color:var(--gray);font-size:14.5px;">Matériaux de qualité, conformité aux normes et suivi rigoureux à chaque étape du chantier.</p>
+      </div>
+      <div>
+        <ul>
+          <li>Matériaux appropriés et conformes aux normes</li>
+          <li>Suivi et expertise à toutes les étapes</li>
+          <li>Respect des délais contractuels</li>
+        </ul>
+        <a href="{% url 'realisations:index' %}" class="pillar-cta">Voir les chantiers →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pillar-row">
+    <div class="pillar-letter">C</div>
+    <div class="pillar-body" style="max-width:calc(1180px - 110px);">
+      <div>
+        <span class="tag">Gestion immobilière</span>
+        <h3>Votre bien, géré comme si c'était le nôtre</h3>
+        <p style="color:var(--gray);font-size:14.5px;">Location, vente, recouvrement des loyers et entretien — nous gérons, vous encaissez.</p>
+      </div>
+      <div>
+        <ul>
+          <li>Location et vente de biens immobiliers</li>
+          <li>Recouvrement des loyers</li>
+          <li>Entretien, nettoyage et acquisition de l'ACD</li>
+        </ul>
+        <a href="{% url 'gestion:index' %}" class="pillar-cta">Confier un bien →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pillar-row">
+    <div class="pillar-letter">D</div>
+    <div class="pillar-body" style="max-width:calc(1180px - 110px);">
+      <div>
+        <span class="tag">Import-export</span>
+        <h3>Les bons matériaux, au bon moment</h3>
+        <p style="color:var(--gray);font-size:14.5px;">Vente et location d'outils, fourniture de matériaux et équipements de construction.</p>
+      </div>
+      <div>
+        <ul>
+          <li>Vente et location d'outils de construction</li>
+          <li>Fourniture de matériaux et équipements</li>
+          <li>Livraison sur chantier partout en Côte d'Ivoire</li>
+        </ul>
+        <a href="{% url 'materiaux:index' %}" class="pillar-cta">Voir le catalogue →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" class="process blueprint">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Notre méthode</span>
+      <h2>Comment se déroule votre projet</h2>
+    </div>
+    <div class="timeline">
+      <div class="tstep"><div class="dot"></div><h4>01 — Conseil & visite terrain</h4><p>Analyse du sol, de la topographie et de vos besoins réels.</p></div>
+      <div class="tstep"><div class="dot"></div><h4>02 — Plans & devis</h4><p>Rendus 2D/3D et devis détaillé avant tout engagement.</p></div>
+      <div class="tstep"><div class="dot"></div><h4>03 — Construction suivie</h4><p>Suivi de chantier, expertise et respect des délais.</p></div>
+      <div class="tstep"><div class="dot"></div><h4>04 — Livraison & gestion</h4><p>Remise des clés, puis gestion locative si vous le souhaitez.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="realisations">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Portfolio</span>
+      <h2>Réalisations récentes</h2>
+      <p>Un aperçu des projets livrés par nos équipes — villas, immeubles et réhabilitations.</p>
+    </div>
+    <div class="grid-3">
+      {% for real in realisations %}
+        <a class="card" href="{% url 'realisations:detail' slug=real.slug %}" style="display:block;">
+          <div class="card-media">
+            {% if real.image_principale %}
+              <img src="{{ real.image_principale.url }}" alt="{{ real.titre }}" style="width:100%;height:100%;object-fit:cover;">
+            {% else %}
+              <svg viewBox="0 0 300 225" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="225" fill="#EFEAE1"/><polygon points="40,140 150,70 260,140" fill="none" stroke="#27963C" stroke-width="2.5"/><rect x="60" y="140" width="180" height="70" fill="none" stroke="#7B7979" stroke-width="1.5"/><rect x="140" y="160" width="24" height="50" fill="none" stroke="#F14624" stroke-width="2"/></svg>
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <span class="card-tag">{{ real.get_type_bien_display }} · {{ real.ville }}</span>
+            <h4>{{ real.titre }} — {{ real.superficie_m2 }} m²</h4>
+            <div class="card-meta"><span>Livré {{ real.annee_livraison }}</span><span>{{ real.duree_mois }} mois</span></div>
+          </div>
+        </a>
+      {% empty %}
+        <p style="grid-column: 1 / -1; color: var(--gray);">Aucune réalisation disponible pour le moment.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="materiaux" class="materials">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Import-export</span>
+      <h2>Matériaux &amp; équipements de construction</h2>
+      <p>Vente et location d'outils, fourniture de matériaux — livrés directement sur votre chantier.</p>
+    </div>
+    <div class="mat-grid">
+      <div class="mat-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <h4>Matériaux gros œuvre</h4>
+        <p>Ciment, fer à béton, agrégats — fournis en gros volume.</p>
+      </div>
+      <div class="mat-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3l7 7-9 9-7-7z"/><path d="M6 15l-3 6 6-3"/></svg>
+        <h4>Outillage de chantier</h4>
+        <p>Vente et location d'outils pour vos équipes ou sous-traitants.</p>
+      </div>
+      <div class="mat-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="14" height="10" rx="1"/><path d="M16 10h4l2 3v4h-6z"/><circle cx="6" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg>
+        <h4>Location d'engins</h4>
+        <p>Engins de terrassement et de levage, avec ou sans opérateur.</p>
+      </div>
+      <div class="mat-card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+        <h4>Équipements techniques</h4>
+        <p>Sanitaire, électricité et finitions, sourcés à l'international.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="temoignages">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Ils nous ont fait confiance</span>
+      <h2>La parole à nos clients</h2>
+    </div>
+    <div class="testi-grid">
+      {% for t in temoignages %}
+        <div class="testi">
+          <p>« {{ t.texte }} »</p>
+          <div class="who"><div class="avatar">{{ t.nom|slice:":2"|upper }}</div><div><b>{{ t.nom }}</b><span>{{ t.role_client }}</span></div></div>
+        </div>
+      {% empty %}
+        <div class="testi">
+          <p>« Du terrain nu à la villa livrée, un seul interlocuteur a suivi tout le projet — les délais annoncés ont été tenus. »</p>
+          <div class="who"><div class="avatar">KT</div><div><b>Koffi T.</b><span>Propriétaire, Cocody</span></div></div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-band blueprint">
+  <div class="wrap">
+    <h2>Un projet immobilier ? Parlons-en.</h2>
+    <p>Étude gratuite, devis sous 72h ouvrées.</p>
+    <div class="cta-actions">
+      <a href="{% url 'contact:index' %}" class="btn btn-primary">Demander un devis</a>
+      <a href="tel:+22500000000" class="btn btn-ghost-light">Nous appeler</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
